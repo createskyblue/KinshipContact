@@ -39,9 +39,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -140,22 +142,20 @@ fun HomeScreen(
                     ) {
                         Text(
                             text = "亲情联系人",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.ExtraBold,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                             color = Color.White
                         )
                         if (isAdminMode) {
                             Spacer(modifier = Modifier.width(8.dp))
                             Surface(
                                 color = Color(0xFFFFD54F),
-                                shape = RoundedCornerShape(8.dp)
+                                shape = RoundedCornerShape(6.dp)
                             ) {
                                 Text(
                                     text = "家属管理模式",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                                     color = Color(0xFF37474F),
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
                                 )
                             }
                         }
@@ -193,15 +193,15 @@ fun HomeScreen(
                                 Icon(
                                     imageVector = Icons.Default.Settings,
                                     contentDescription = "设置",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(28.dp)
+                                    tint = Color.White
                                 )
                             }
                         }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isAdminMode) Color(0xFF1565C0) else Color(0xFFD32F2F)
+                    containerColor = if (isAdminMode) Color(0xFF1565C0) else Color(0xFFD32F2F),
+                    titleContentColor = Color.White
                 )
             )
         }
@@ -210,64 +210,59 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color(0xFFF5F7FA))
+                .background(MaterialTheme.colorScheme.background)
         ) {
             // Admin Action Banner
             if (isAdminMode) {
                 Surface(
-                    color = Color(0xFFE3F2FD),
-                    shadowElevation = 3.dp,
+                    color = MaterialTheme.colorScheme.surfaceContainerLow,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 8.dp),
-                        horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(10.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Button(
-                            onClick = { viewModel.openAddContactDialog() },
-                            shape = RoundedCornerShape(10.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFF1565C0),
-                                contentColor = Color.White
-                            ),
+                    Column {
+                        Row(
                             modifier = Modifier
-                                .weight(1f)
-                                .height(42.dp)
-                                .testTag("add_contact_button")
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
+                            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(
-                                text = "添加联系人",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White,
-                                maxLines = 1,
-                                softWrap = false
-                            )
-                        }
+                            Button(
+                                onClick = { viewModel.openAddContactDialog() },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .testTag("add_contact_button")
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "添加联系人",
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
 
-                        Button(
-                            onClick = { viewModel.openSystemImportDialog() },
-                            shape = RoundedCornerShape(10.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFF1565C0),
-                                contentColor = Color.White
-                            ),
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(42.dp)
-                        ) {
-                            Text(
-                                text = "从通讯录导入",
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White,
-                                maxLines = 1,
-                                softWrap = false
-                            )
+                            OutlinedButton(
+                                onClick = { viewModel.openSystemImportDialog() },
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Contacts,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "从通讯录导入",
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
                         }
+                        HorizontalDivider()
                     }
                 }
             }

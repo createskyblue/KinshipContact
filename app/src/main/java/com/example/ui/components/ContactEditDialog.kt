@@ -113,14 +113,15 @@ fun ContactEditDialog(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Avatar Display Area
+                // Avatar Display Area (Click directly to change photo)
                 Box(
                     modifier = Modifier
-                        .size(120.dp)
-                        .clip(RoundedCornerShape(18.dp))
-                        .border(3.dp, Color(0xFF1976D2), RoundedCornerShape(18.dp))
+                        .size(136.dp)
+                        .clip(RoundedCornerShape(20.dp))
+                        .border(3.dp, Color(0xFF1565C0), RoundedCornerShape(20.dp))
                         .background(Color(0xFFE3F2FD))
-                        .clickable { photoPickerLauncher.launch("image/*") },
+                        .clickable { photoPickerLauncher.launch("image/*") }
+                        .testTag("change_photo_button"),
                     contentAlignment = Alignment.Center
                 ) {
                     if (!photoPathState.isNullOrEmpty() && File(photoPathState!!).exists()) {
@@ -143,49 +144,18 @@ fun ContactEditDialog(
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = null,
-                                modifier = Modifier.size(54.dp),
-                                tint = Color(0xFF1976D2)
+                                modifier = Modifier.size(60.dp),
+                                tint = Color(0xFF1565C0)
                             )
+                            Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = "选择头像照片",
-                                fontSize = 12.sp,
-                                color = Color(0xFF1976D2),
+                                text = "点击设置头像",
+                                fontSize = 13.sp,
+                                color = Color(0xFF1565C0),
                                 fontWeight = FontWeight.Bold
                             )
                         }
                     }
-
-                    // Camera badge
-                    Surface(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(6.dp),
-                        shape = CircleShape,
-                        color = Color(0xFF1976D2)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.CameraAlt,
-                            contentDescription = "选择照片",
-                            tint = Color.White,
-                            modifier = Modifier
-                                .padding(6.dp)
-                                .size(18.dp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Avatar change button
-                OutlinedButton(
-                    onClick = { photoPickerLauncher.launch("image/*") },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF1976D2)),
-                    modifier = Modifier.testTag("change_photo_button")
-                ) {
-                    Icon(imageVector = Icons.Default.CameraAlt, contentDescription = null, modifier = Modifier.size(16.dp))
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text("更换 / 上传头像", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
