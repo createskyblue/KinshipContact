@@ -16,10 +16,27 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CALL_PHONE",
+        "READ_CONTACTS",
+        "VIBRATE",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS"
+      ],
+      "package": "com.anonymous.KinshipContactRN"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "允许亲情联系人访问您的通讯录"
+        }
+      ],
+      "expo-sharing"
+    ]
   }
 }
