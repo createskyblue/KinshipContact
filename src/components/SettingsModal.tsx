@@ -139,6 +139,7 @@ export function SettingsModal({
               <Text style={styles.actionText}>从通讯录导入</Text>
             </TouchableOpacity>
 
+{/* 备份还原功能不稳定，暂时隐藏
             <View style={styles.actionRow}>
               <TouchableOpacity
                 style={[styles.actionBtn, styles.actionHalf]}
@@ -155,6 +156,7 @@ export function SettingsModal({
                 <Text style={styles.actionText}>还原</Text>
               </TouchableOpacity>
             </View>
+            */}
           </View>
         </ScrollView>
       </View>
